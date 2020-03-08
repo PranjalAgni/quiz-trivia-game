@@ -1,3 +1,3 @@
-const six = () => {
-  console.log('This is six file');
+const sixChanged = () => {
+  console.log('This is six file Changed');
 };

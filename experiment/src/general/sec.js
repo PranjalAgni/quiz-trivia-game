@@ -1,3 +1,3 @@
-const sec = () => {
-  console.log('This is sec file');
+const secChanged = () => {
+  console.log('This is sec file Changed');
 };

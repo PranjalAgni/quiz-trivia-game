@@ -1,3 +1,3 @@
-const third = () => {
-  console.log('This is third file');
+const thirdChanged = () => {
+  console.log('This is third file Changed');
 };

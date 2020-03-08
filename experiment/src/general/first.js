@@ -1,3 +1,3 @@
-const first = () => {
-  console.log('This is first file');
+const firstChanged = () => {
+  console.log('This is first file Changed');
 };
