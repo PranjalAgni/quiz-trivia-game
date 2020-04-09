@@ -8,11 +8,12 @@ async function getTriviaPage(pageNum: number): Promise<Object> {
   const response = await fetch(url);
   const html = await response.text();
   const $ = cheerio.load(html);
-  const containers = $(".listicle-page");
+  const questionParentContainers = $(".listicle-page");
+  const answerParentContainers = $(".listicle-card");
   const store = [];
-  for (let i = 0; i < containers.length; i += 2) {
-    const questionContainer = $(containers[i]);
-    const answerContainer = $(containers[i + 1]);
+  for (let i = 0; i < questionParentContainers.length; i += 2) {
+    const questionContainer = $(questionParentContainers[i]);
+    const answerContainer = $(answerParentContainers[i + 1]);
     const options: Object[] = [];
 
     const questionImage = $(questionContainer.find("img")).attr("data-original-src");
@@ -26,9 +27,7 @@ async function getTriviaPage(pageNum: number): Promise<Object> {
 
     // Possible options for the answer
     questionContainer.find("p").each((_, element) => {
-      const text = $(element)
-        .text()
-        .trim();
+      const text = $(element).text().trim();
       const matching = /^[A-D]\.\s(.*)/g.exec(text);
       if (matching) {
         options.push(matching[1]);
@@ -36,18 +35,10 @@ async function getTriviaPage(pageNum: number): Promise<Object> {
     });
 
     const answerText = $(answerContainer.find("h2")[0]).text();
-    let answer = "";
 
-    if (options.length) {
-      answer = /^Answer: [A-D]\.\s(.*)/g.exec(answerText)[1].trim();
-    } else {
-      answer = /^Answer:\s(.*)/g.exec(answerText)[0].trim();
-    }
+    const answer = /^Answer:\s(.*)/g.exec(answerText)[1].trim();
 
-    const answerDescription = $(answerContainer)
-      .find("p")
-      .slice(1)
-      .text();
+    const answerDescription = $(answerContainer).find("p").text();
 
     store.push({
       questionImage,
@@ -60,15 +51,14 @@ async function getTriviaPage(pageNum: number): Promise<Object> {
   return store;
 }
 
-async function getAllTriviaQuestions() {
-  let questions = [];
+async function getAllTriviaQuestions(): Promise<Array<Object>> {
+  let questions: Array<Object> = [];
   for (let i = 1; i < 11; i++) {
     console.log("Requesting Page: ", i);
-    questions[i - 1] = await getTriviaPage(i);
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    questions = questions.concat(await getTriviaPage(i));
   }
 
-  console.log(questions);
+  return questions;
 }
 
-getAllTriviaQuestions();
+export default getAllTriviaQuestions;
