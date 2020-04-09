@@ -2,14 +2,16 @@
   "name": "server",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "nodemon src/server.ts --exec ts-node src/server.ts -e ts,graphql",
+    "scrape": "ts-node src/scrape.ts"
   },
   "keywords": [],
-  "author": "",
+  "author": "Pranjal Agnihotri",
   "license": "ISC",
   "dependencies": {
+    "apollo-server-express": "^2.12.0",
     "cheerio": "^1.0.0-rc.3",
     "cors": "^2.8.5",
     "express": "^4.17.1",
@@ -26,6 +28,7 @@
     "eslint": "^6.8.0",
     "eslint-config-airbnb-base": "^14.0.0",
     "eslint-plugin-import": "^2.20.0",
+    "nodemon": "^2.0.3",
     "ts-node": "^8.6.2",
     "typescript": "^3.7.5"
   }
