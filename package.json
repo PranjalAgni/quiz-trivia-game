@@ -1,0 +1,34 @@
+{
+  "name": "root",
+  "private": true,
+  "description": "Trivia quiz game",
+  "scripts": {
+    "check22": "echo \"foo\" | commitlint",
+    "start": "concurrently -k yarn:dev-client yarn:dev-server",
+    "bootstrap": "lerna bootstrap",
+    "start-server": "lerna run start --stream --scope=@root/server",
+    "dev-server": "lerna run dev --stream --scope=@root/server",
+    "dev-client": "lerna run serve --stream --scope=@root/client",
+    "lint": "eslint --fix packages/** --ext .js,.ts,.vue"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^8.3.5",
+    "@commitlint/config-conventional": "^8.3.4",
+    "@typescript-eslint/eslint-plugin": "^2.27.0",
+    "@typescript-eslint/parser": "^2.27.0",
+    "concurrently": "^5.1.0",
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb-base": "^14.1.0",
+    "eslint-config-prettier": "^6.10.1",
+    "eslint-plugin-import": "^2.20.2",
+    "eslint-plugin-prettier": "^3.1.2",
+    "eslint-plugin-vue": "^6.2.2",
+    "husky": "^3.0.8",
+    "lerna": "^3.20.2",
+    "prettier": "^2.0.4",
+    "typescript": "^3.8.3"
+  },
+  "dependencies": {
+    "lerna": "^3.20.2"
+  }
+}
