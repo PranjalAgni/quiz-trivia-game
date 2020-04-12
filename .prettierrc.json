@@ -1,0 +1,21 @@
+{
+  "trailingComma": "none",
+  "singleQuote": false,
+  "printWidth": 150,
+  "semi": true,
+  "endOfLine": "crlf",
+  "overrides": [
+    {
+      "files": ".prettierrc",
+      "options": {
+        "parser": "json"
+      }
+    },
+    {
+      "files": ".eslintrc",
+      "options": {
+        "parser": "json"
+      }
+    }
+  ]
+}
