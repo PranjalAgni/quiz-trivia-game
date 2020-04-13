@@ -1,6 +1,5 @@
 {
   "hooks": {
-    "pre-commit": "yarn check22",
     "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
   }
 }
