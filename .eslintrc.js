@@ -19,6 +19,7 @@ module.exports = {
   rules: {
     "comma-dangle": "off",
     quotes: ["error", "double"],
-    "prettier/prettier": "error"
+    "prettier/prettier": "error",
+    "arrow-parens": ["error", "as-needed"]
   }
 };
