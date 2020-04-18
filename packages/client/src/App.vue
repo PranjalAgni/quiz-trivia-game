@@ -1,32 +1,72 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+    <button @click="nextQuestion()">Next Question</button>
+    <div v-if="this.currentQuestion" class="current-question">
+      <img :src="currentQuestion.questionImage" />
+      <p>{{ currentQuestion.question }}</p>
+      <div>
+        <button v-for="option in currentQuestion.options" :key="option" @click="guess(option)">
+          {{ option }}
+        </button>
+      </div>
     </div>
-    <router-view />
   </div>
 </template>
 
+<script>
+import gql from "graphql-tag";
+
+export default {
+  data: () => ({
+    currentQuestion: null
+  }),
+  apollo: {
+    questions: gql`
+      query {
+        questions {
+          question
+          answer
+          answerDescription
+          options
+          questionImage
+        }
+      }
+    `
+  },
+  methods: {
+    nextQuestion() {
+      this.currentQuestion = this.questions[Math.floor(Math.random() * this.questions.length)];
+    },
+    guess(option) {
+      if (option === this.currentQuestion.answer) {
+        alert("Correct");
+      } else {
+        alert(`Wrong answer!!!, the correct answer was ${this.currentQuestion.answer}`);
+        this.nextQuestion();
+      }
+    }
+  }
+};
+</script>
+
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+.current-question {
+  width: 85%;
+  font-family: sans-serif;
+  font-size: 2rem;
   text-align: center;
-  color: #2c3e50;
+  margin: 1rem;
+  margin-left: 2em;
 }
 
-#nav {
-  padding: 30px;
+.current-question img {
+  width: 100%;
 }
 
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
+button {
+  display: block;
+  width: 100%;
+  font-size: 2rem;
+  text-align: center;
 }
 </style>
