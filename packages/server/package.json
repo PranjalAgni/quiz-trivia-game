@@ -20,7 +20,7 @@
     "faker": "^4.1.0",
     "https-proxy-agent": "^4.0.0",
     "morgan": "^1.9.1",
-    "node-fetch": "^2.6.0"
+    "node-fetch": "^2.6.1"
   },
   "devDependencies": {
     "@types/cheerio": "^0.22.16",
