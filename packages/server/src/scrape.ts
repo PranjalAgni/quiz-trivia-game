@@ -1,7 +1,7 @@
 import cheerio from "cheerio";
 import fetch from "node-fetch";
 
-const baseUrl = "https://www.rd.com/culture/trivia-questions/page";
+const baseUrl = "https://www.rd.com/list/trivia-questions/";
 
 async function getTriviaPage(pageNum: number): Promise<Object> {
   const url = `${baseUrl}/${pageNum}`;
@@ -53,11 +53,12 @@ async function getTriviaPage(pageNum: number): Promise<Object> {
 
 async function getAllTriviaQuestions(): Promise<Array<Object>> {
   let questions: Array<Object> = [];
-  for (let i = 1; i < 11; i++) {
-    console.log("Requesting Page: ", i);
-    questions = questions.concat(await getTriviaPage(i));
+  for (let i = 1; i < 11; i += 1) {
+    questions.push(getTriviaPage(i));
   }
 
+  questions = await Promise.all(questions);
+  console.log("Questions = ", questions);
   return questions;
 }
 

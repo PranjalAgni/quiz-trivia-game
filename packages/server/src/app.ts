@@ -33,12 +33,12 @@ const resolvers = {
     date: () => new Date().toISOString(),
     name: () => {
       const alphabets: Array<string> = [];
-      for (let i = 0; i < 26; i++) {
+      for (let i = 0; i < 26; i += 1) {
         alphabets.push(String.fromCharCode(97 + i));
       }
 
       let randomName: String = "";
-      for (let i = 0; i < 5; i++) {
+      for (let i = 0; i < 5; i += 1) {
         const idx = Math.floor(Math.random() * Math.floor(alphabets.length));
         randomName += alphabets[idx];
       }

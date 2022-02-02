@@ -16,10 +16,28 @@ module.exports = {
     sourceType: "module"
   },
   plugins: ["vue", "@typescript-eslint"],
+  settings: {
+    "import/resolver": {
+      node: {
+        paths: ["packages/*"],
+        extensions: [".js", ".jsx", ".ts", ".tsx"]
+      }
+    }
+  },
   rules: {
     "comma-dangle": "off",
     quotes: ["error", "double"],
     "prettier/prettier": "error",
-    "arrow-parens": ["error", "as-needed"]
+    "arrow-parens": ["error", "as-needed"],
+    "import/extensions": [
+      "error",
+      "ignorePackages",
+      {
+        js: "never",
+        jsx: "never",
+        ts: "never",
+        tsx: "never"
+      }
+    ]
   }
 };
